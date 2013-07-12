@@ -21,11 +21,11 @@ public class SessionFactoryInstaller implements ApplicationListener<ContextRefre
 	@Autowired
 	ApplicationContext appContext;
 	
-	@Autowired
-	DataSource dataSource;
-	
 	@SuppressWarnings("rawtypes")
 	public void onApplicationEvent(ContextRefreshedEvent event) {
+		DataSource dataSource = appContext.getBean(DataSource.class);
+		SessionFactoryInstallerWeawer weawer = appContext.getBean(SessionFactoryInstallerWeawer.class);
+		
 		Map<String, HibernateDAOSupport> name2DAO = appContext.getBeansOfType(HibernateDAOSupport.class);
 		Collection<HibernateDAOSupport> daos = name2DAO.values();
 		
@@ -41,6 +41,9 @@ public class SessionFactoryInstaller implements ApplicationListener<ContextRefre
 		localSessionFactoryBean.setAnnotatedClasses(entityClasses.toArray(new Class[0]));
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.put("connection.autocommit", true);
+		if (weawer != null) {
+			weawer.configureHibernate(hibernateProperties);
+		}
 		localSessionFactoryBean.setHibernateProperties(hibernateProperties);
 		try {
 			localSessionFactoryBean.afterPropertiesSet();
