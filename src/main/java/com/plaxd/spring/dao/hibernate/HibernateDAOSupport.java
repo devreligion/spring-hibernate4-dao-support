@@ -17,12 +17,12 @@ public class HibernateDAOSupport<K extends Serializable, T> {
 	}
 	
 	public static interface InSessionAction<R> {
-		public R doInSession(Session session);
+		public R perform(Session session);
 	}
 	
 	public void save(final T object) {
 		doInSession(new InSessionAction<Void>() {
-			public Void doInSession(Session session) {
+			public Void perform(Session session) {
 				session.save(object);
 				return null;
 			}
@@ -33,7 +33,7 @@ public class HibernateDAOSupport<K extends Serializable, T> {
 		Session session = sessionFactory.openSession();
 		session.setFlushMode(FlushMode.MANUAL);
 		try {
-			R result = action.doInSession(session);
+			R result = action.perform(session);
 			session.flush();
 			return result;
 		} finally {
