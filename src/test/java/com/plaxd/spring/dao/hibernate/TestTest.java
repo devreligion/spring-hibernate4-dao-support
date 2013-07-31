@@ -14,7 +14,7 @@ public class TestTest {
 		MyEntityDAO dao = context.getBean(MyEntityDAO.class);
 		my_entity testEntity = new my_entity();
 		testEntity.id = "1";
-		dao.save(testEntity);
+		dao.create(testEntity);
 		assertNotNull(dao.load("1"));
 		context.close();
 	}

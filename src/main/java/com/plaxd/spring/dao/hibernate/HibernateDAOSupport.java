@@ -20,10 +20,19 @@ public class HibernateDAOSupport<K extends Serializable, T> {
 		public R perform(Session session);
 	}
 	
-	public void save(final T object) {
+	public void create(final T object) {
 		doInSession(new InSessionAction<Void>() {
 			public Void perform(Session session) {
 				session.save(object);
+				return null;
+			}
+		});
+	}
+	
+	public void update(final T object) {
+		doInSession(new InSessionAction<Void>() {
+			public Void perform(Session session) {
+				session.update(object);
 				return null;
 			}
 		});
