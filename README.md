@@ -3,7 +3,7 @@ spring-hibernate4-dao-support
 
 Util library for building DAO layer implementation based on spring and hibernate4.
 
-# Features and restrictions
+## Features and restrictions
 
 - Automatic discovery of DAO classes. 
 
@@ -11,9 +11,9 @@ Util library for building DAO layer implementation based on spring and hibernate
 
 - No transaction support yet implemented. Autocommit mode.
 
-# Usage
+## Usage
 
-## Define entity class
+### Define entity class
 
 	@Entity
 	public class my_entity {
@@ -22,7 +22,9 @@ Util library for building DAO layer implementation based on spring and hibernate
 		public String id;
 	}
 
-## Define DAO class. You can add own method which access hibernate session.
+### Define DAO class. 
+
+You can add own method which access hibernate session.
 
 	public class MyEntityDAO extends HibernateDAOSupport<String, my_entity> {
 
@@ -31,7 +33,9 @@ Util library for building DAO layer implementation based on spring and hibernate
 		}
 	}
 
-## Define spring configuration beans (example for Java spring configuration)
+### Define spring configuration 
+
+Example for Java spring configuration.
 
 	@Bean 
 	SessionFactoryInstaller sessionFactoryInstaller() {
@@ -43,7 +47,7 @@ Util library for building DAO layer implementation based on spring and hibernate
 		return new MyEntityDAOHibernateImpl();
 	}
 
-## Use DAO
+### Use DAO
 
 	@Autowired
 	MyEntityDAO dao;
@@ -54,7 +58,7 @@ Util library for building DAO layer implementation based on spring and hibernate
 		dao.create(entity);
 	}
 
-# Required dependencies (maven format)
+## Required dependencies
 
 	<dependency>
 		<groupId>org.springframework</groupId>
