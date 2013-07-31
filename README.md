@@ -22,7 +22,7 @@ Util library for building DAO layer implementation based on spring and hibernate
 		public String id;
 	}
 
-### Define DAO class. 
+### Define DAO class
 
 You can add own method which access hibernate session.
 
